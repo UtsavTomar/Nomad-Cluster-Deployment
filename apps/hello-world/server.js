@@ -93,9 +93,14 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-// Start server
-app.listen(PORT, HOST, () => {
-  console.log(`🚀 Hello World app listening on ${HOST}:${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Health check: http://${HOST}:${PORT}/health`);
-});
+// Start server (only if not in test environment)
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, HOST, () => {
+    console.log(`🚀 Hello World app listening on ${HOST}:${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Health check: http://${HOST}:${PORT}/health`);
+  });
+}
+
+// Export app for testing
+module.exports = app;
