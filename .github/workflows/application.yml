@@ -109,6 +109,11 @@ jobs:
         unzip nomad_1.6.2_linux_amd64.zip
         sudo mv nomad /usr/local/bin/
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.6.0'
+
     - name: Get Nomad UI URL
       id: get-nomad-url
       run: |
